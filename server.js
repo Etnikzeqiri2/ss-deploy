@@ -55,8 +55,8 @@ app.get("/", (req,res) => {
 
 app.post('/product/create', async (req, res) => {
     try {
-      const { name, stock, dimensions } = req.body;
-      const newProduct = new Product({ name, stock, dimensions });
+      const { name, stock, dimensions,njesiaMatse } = req.body;
+      const newProduct = new Product({ name, stock, dimensions, njesiaMatse });
       await newProduct.save();
       res.status(201).json(newProduct);
     } catch (error) {
@@ -65,7 +65,6 @@ app.post('/product/create', async (req, res) => {
     }
   });
   
-  // Route to get all products
   app.get('/product/all', async (req, res) => {
     try {
       const products = await Product.find();
@@ -76,7 +75,6 @@ app.post('/product/create', async (req, res) => {
     }
   });
   
-  // Route to get a product by ID
   app.get('/product/:id', async (req, res) => {
     try {
       const product = await Product.findById(req.params.id);
