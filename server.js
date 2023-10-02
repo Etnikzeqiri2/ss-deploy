@@ -130,6 +130,20 @@ app.post('/product/create', async (req, res) => {
     }
   });
 
+  app.post('/order/delete/:id', async (req, res) => {
+    try {
+      const deletedOrder = await Order.findByIdAndDelete(req.params.id);
+      if (!deletedOrder) {
+        res.status(404).json({ error: "Product not found" });
+        return;
+      }
+      res.json({ message: "Order deleted successfully" });
+    } catch (error) {
+      console.error("Error deleting product by ID:", error);
+      res.status(500).json({ error: "Could not delete product" });
+    }
+  });
+
 
   app.post("/order/create", async (req, res) => {
     try {
